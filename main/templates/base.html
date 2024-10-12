@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="{% static 'bootstrap-icons/font/bootstrap-icons.css' %}" rel="stylesheet" />
+  </head>
+<body>
+
+    <!-- header-->
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="../" style="color: #ffffff">TutorSystem</a>
+        
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" style="color:#ffffff" role="button" data-bs-toggle="dropdown">Dropdown</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Student Login</a></li>
+              <li><a class="dropdown-item" href="#">Tutor Login</a></li>
+              <li><a class="dropdown-item" href="#">Option</a></li>
+            </ul>
+          </li>
+
+        </div>
+</nav>
+
+
+{% block content %} {% endblock %}
+<!--header ends here-->
+
+    <!-- footer start-->
+    <footer class="container py-5">
+        <p class="float-end"><a href="#">Back to top</a></p>
+        <p>
+          © 2024 – 2025 TutorSystem, Inc. ·
+          <a href="#">Privacy</a> ·
+          <a href="#">Terms</a> ·
+          <a href="#">FAQ</a> ·
+          <a href="#">Contact Us</a>
+        </p>
+      </footer>
+  
+      <!-- Bootstrap Bundle -->
+      <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
+    </body>
+  </html>
+  <!-- footer end-->
