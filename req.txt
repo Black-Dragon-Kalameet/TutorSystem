@@ -1,0 +1,19 @@
+goal of appilcation in the first 2 minutes
+system that can help mo3eed or the professor,
+a communication system between professors or tutors,
+
+to follow the progress of the students
+
+introduction chapter to show how important the project is
+
+structured interview?
+
+prblems the professors faces
+
+need to know who is active at work at home.
+helps add grades.
+lots of messages on watsapp so it creates an isssue having a centralised message system is better
+reports for interactions and grades.
+
+from the internet look for my own project then check the features and impelement them
+use the other projects as reference

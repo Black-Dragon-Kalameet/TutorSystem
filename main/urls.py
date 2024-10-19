@@ -6,6 +6,9 @@ from django.conf.urls.static import static
 #Define the URL patterns for the app. The '' path maps to the 'home' view
 urlpatterns =[
     path('',views.home,name='home'),
+    path('student/slogin',views.slogin,name='slogin'),
+    path('tutor/tutorlogin',views.tutorlogin,name='tutorlogin')
+
      
 
 ]
