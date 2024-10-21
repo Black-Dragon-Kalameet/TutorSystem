@@ -6,8 +6,9 @@ from . import forms
 
 # Create your views here.
 def home(request):
+     carosels = models.carosel.objects.all()
 
-    return render(request, 'home.html')
+     return render(request, 'home.html',{'carosels':carosels})
 
 
 
