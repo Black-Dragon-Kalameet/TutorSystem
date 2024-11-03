@@ -15,3 +15,12 @@ class tutorloginform(forms.ModelForm):
      class Meta:
           model= models.tutor
           fields = ('username','password')
+
+class messageform(forms.ModelForm):
+    class Meta:
+        model = models.message
+        fields = ['message', 'attachment']
+        receiver = forms.ChoiceField() 
+
+     
+

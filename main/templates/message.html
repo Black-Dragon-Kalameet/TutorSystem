@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.message.label }} {{ form.message }}  <!-- Render your message field -->
+
+    <label for="receiver_id">Send to:</label>
+    <select name="receiver_id" required>
+        <!-- Populate with the list of available receivers -->
+        {% for user in available_receivers %}
+            <option value="{{ user.id }}">{{ user.username }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Send</button>
+</form>
+
+<div class="messages">
+    {% for msg in allmessages %}
+    <p><strong>From:</strong> 
+        {% if msg.sender_tutor %}
+            {{ msg.sender_tutor }}
+        {% else %}
+            {{ msg.sender_student }}
+        {% endif %}
+    </p>
+    <p><strong>To:</strong> 
+        {% if msg.receiver_tutor %}
+            {{ msg.receiver_tutor }}
+        {% else %}
+            {{ msg.receiver_student }}
+        {% endif %}
+    </p>
+    
+        <p><strong>Message:</strong> {{ msg.message }}</p>
+        {% if msg.attachment %}
+            <p><a href="{{ msg.attachment.url }}" download>Download Attachment</a></p>
+        {% endif %}
+        <hr>
+    {% endfor %}
+</div>
+
+{% endblock %}
