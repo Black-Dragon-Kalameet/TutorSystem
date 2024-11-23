@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.message.label }} {{ form.message }}  <!-- Render your message field -->
+    {{ form.message.label }} {{ form.message }} 
 
     <label for="receiver_id">Send to:</label>
     <select name="receiver_id" required>
-        <!-- Populate with the list of available receivers -->
         {% for user in available_receivers %}
             <option value="{{ user.id }}">{{ user.username }}</option>
         {% endfor %}

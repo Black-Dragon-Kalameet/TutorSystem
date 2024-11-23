@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Bootstrap CSS -->
     <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" />
-    <!-- Bootstrap Icons -->
     <link href="{% static 'bootstrap-icons/font/bootstrap-icons.css' %}" rel="stylesheet" />
   </head>
 <body>
@@ -19,7 +16,7 @@
         
 
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" style="color:#ffffff" role="button" data-bs-toggle="dropdown">Dropdown</a>
+            <a class="nav-link dropdown-toggle" style="color:#ffffff" role="button" data-bs-toggle="dropdown">Dropdown</a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{% url 'slogin' %}">Student Login</a></li>
               <li><a class="dropdown-item" href="{% url 'tutorlogin' %}">Tutor Login</a></li>
@@ -46,7 +43,6 @@
         </p>
       </footer>
   
-      <!-- Bootstrap Bundle -->
       <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
     </body>
   </html>
