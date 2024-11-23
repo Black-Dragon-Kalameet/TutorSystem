@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Select a Recipient</h2>
+<ul>
+    {% for recipient in available_recipients %}
+    <li>
+        <a href="{% url 'message' recipient.id %}">{{ recipient.username }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

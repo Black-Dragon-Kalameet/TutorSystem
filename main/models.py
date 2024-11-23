@@ -20,6 +20,8 @@ class student(models.Model):
     Student_name = models.CharField(max_length=180, null=False)
     username = models.CharField(max_length=180, null=False)
     password = models.CharField(max_length=180,null=False)
+    def __str__(self):
+     return self.Student_name
 
 class carosel(models.Model):
     img=models.ImageField(upload_to="carosel/")

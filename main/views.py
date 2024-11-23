@@ -56,43 +56,57 @@ def slogin(request):
     form = forms.sloginform
     return render(request,'student/slogin.html',{'form':form, 'message': message})
 
+def message(request, recipient_id=None):
+    if recipient_id is None:
+        return redirect('select_recipient')  # Redirect to recipient selection if no recipient is provided
 
-def message(request):
-    form = forms.messageform()  
+    form = forms.messageform()
     allmessages = []
-    available_receivers = []  
-
 
     if 'tutorlogin' in request.session and request.session['tutorlogin'] == True:
-        id = request.session['tutorid']
-        allmessages = models.message.objects.filter(sender_tutor=id) | models.message.objects.filter(receiver_tutor=id)
-        available_receivers = models.student.objects.all() 
+        sender_id = request.session['tutorid']
+        recipient = models.student.objects.get(id=recipient_id)
+        allmessages = models.message.objects.filter(
+            sender_tutor=sender_id, receiver_student=recipient_id
+        ) | models.message.objects.filter(
+            sender_student=recipient_id, receiver_tutor=sender_id
+        )
     else:
-        id= request.session['studentid']
-        allmessages = models.message.objects.filter(sender_student=id) | models.message.objects.filter(receiver_student=id)
-        available_receivers = models.tutor.objects.all()  
+        sender_id = request.session['studentid']
+        recipient = models.tutor.objects.get(id=recipient_id)
+        allmessages = models.message.objects.filter(
+            sender_student=sender_id, receiver_tutor=recipient_id
+        ) | models.message.objects.filter(
+            sender_tutor=recipient_id, receiver_student=sender_id
+        )
 
     if request.method == 'POST':
         form = forms.messageform(request.POST, request.FILES)
         if form.is_valid():
             message_instance = form.save(commit=False)
-            receiver_id = request.POST.get('receiver_id')  
-            if request.session['tutorlogin'] == True:
-                id2= request.session['tutorid']
-                message_instance.sender_tutor = models.tutor.objects.get(id=id2)
-                message_instance.receiver_student = models.student.objects.get(id=receiver_id)
+            if 'tutorlogin' in request.session and request.session['tutorlogin'] == True:
+                message_instance.sender_tutor = models.tutor.objects.get(id=sender_id)
+                message_instance.receiver_student = models.student.objects.get(id=recipient_id)
             else:
-                id2= request.session['studentid']
-                message_instance.sender_student = models.student.objects.get(id=id2)
-                message_instance.receiver_tutor = models.tutor.objects.get(id=receiver_id)
-
+                message_instance.sender_student = models.student.objects.get(id=sender_id)
+                message_instance.receiver_tutor = models.tutor.objects.get(id=recipient_id)
             message_instance.save()
-            return redirect('message')
+            return redirect('message', recipient_id=recipient_id)
 
     return render(request, 'message.html', {
         'allmessages': allmessages,
         'form': form,
-        'available_receivers': available_receivers,  
+        'recipient': recipient,
     })
 
 
+def select_recipient(request):
+    available_recipients = []
+
+    if request.session['tutorlogin'] == True:
+
+        available_recipients = models.student.objects.all()
+    else:
+        available_recipients = models.tutor.objects.all()
+
+    return render(request, 'select_recipient.html', {'available_recipients': available_recipients})

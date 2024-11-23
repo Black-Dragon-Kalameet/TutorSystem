@@ -9,6 +9,8 @@ urlpatterns =[
     path('student/slogin',views.slogin,name='slogin'),
     path('tutor/tutorlogin',views.tutorlogin,name='tutorlogin'),
     path('message',views.message,name='message'),
+    path('select_recipient/', views.select_recipient, name='select_recipient'),
+    path('message/<int:recipient_id>/', views.message, name='message'),
 
      
 

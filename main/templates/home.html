@@ -34,9 +34,60 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-<h1>
-    hello
-</h1>
+
+
+
+  <section class="container my-4">
+    <h1 class="text-center mb-4 section-heading">Services</h1>
+    <div class="row">
+  <!-- studnt logn card -->
+
+      <div class="col-md-4">
+        <div class="card">
+          <img src="media/student.png" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h3 class="card-title">Student Login</h3>
+            <p class="card-text">student login from here</p>
+            <a href="{% url 'slogin' %}" class="btn btn-primary">Click Here</a>
+          </div>
+        </div>
+      </div>
+  <!-- strudent login end -->
+
+  <!-- tutor card starts -->
+
+      <div class="col-md-4">
+        <div class="card">
+          <img src="media/tutor.png" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h3 class="card-title">tutor Login</h3>
+            <p class="card-text">tutors login from here</p>
+            <a href="{% url 'tutorlogin' %}" class="btn btn-primary">Click here</a>
+          </div>
+        </div>
+      </div>
+
+  <!-- tutor card ends -->
+
+
+  <!-- lib card starts -->
+
+  <div class="col-md-4">
+    <div class="card">
+      <img src="media/lib.jpg" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h3 class="card-title">Library</h3>
+        <p class="card-text">Acesss our Educational Liberary</p>
+        <a href="#" class="btn btn-primary">Click here</a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<!--- lib card ends -->
+
+
+
 
 
 {% endblock %}
