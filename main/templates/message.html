@@ -1,37 +1,53 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2>Chat with {{ recipient.username }}</h2>
-<a href="{% url 'select_recipient' %}">Back to Recipients</a>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-3">Chat with {{ recipient.username }}</h2>
+            <a href="{% url 'select_recipient' %}" class="btn btn-secondary btn-sm">Back to Recipients</a>
+        </div>
+    </div>
 
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.message.label }} {{ form.message }} 
-    <button type="submit">Send</button>
-</form>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="message" class="form-label">{{ form.message.label }}</label>
+                    {{ form.message }}
+                </div>
+                <button type="submit" class="btn btn-primary">Send</button>
+            </form>
+        </div>
+    </div>
 
-<div class="messages">
-    {% for msg in allmessages %}
-    <p><strong>From:</strong> 
-        {% if msg.sender_tutor %}
-            {{ msg.sender_tutor }}
-        {% else %}
-            {{ msg.sender_student }}
-        {% endif %}
-    </p>
-    <p><strong>To:</strong> 
-        {% if msg.receiver_tutor %}
-            {{ msg.receiver_tutor }}
-        {% else %}
-            {{ msg.receiver_student }}
-        {% endif %}
-    </p>
-    <p><strong>Message:</strong> {{ msg.message }}</p>
-    {% if msg.attachment %}
-        <p><a href="{{ msg.attachment.url }}" download>Download Attachment</a></p>
-    {% endif %}
-    <hr>
-    {% endfor %}
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="chat-box border rounded p-3 bg-light" style="height: 400px; overflow-y: auto;">
+                {% for msg in allmessages %}
+                    <div class="mb-3">
+                        <div class="message p-2 rounded bg-light">
+                            <p class="mb-1"><strong>
+                                {% if msg.sender_tutor %}
+                                    {{ msg.sender_tutor.username }}
+                                {% else %}
+                                    {{ msg.sender_student.username }}
+                                {% endif %}
+                            </strong></p>
+                            <p class="mb-1">{{ msg.message }}</p>
+                            {% if msg.attachment %}
+                                <p><a href="{{ msg.attachment.url }}" class="text-dark" download>📎 Download Attachment</a></p>
+                            {% endif %}
+                            <small class="d-block">{{ msg.timestamp|date:"M d, Y h:i A" }}</small>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>No messages yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
