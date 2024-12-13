@@ -56,6 +56,24 @@ def slogin(request):
     form = forms.sloginform
     return render(request,'student/slogin.html',{'form':form, 'message': message})
 
+def studentprof(request):
+    msg =None
+    sid =  request.session['studentid']
+    student = models.student.objects.get(id=sid)
+    if request.method == 'POST':
+       form = forms.supdateprofile(request.POST,request.FILES,instance=student)
+       if form.is_valid:
+           form.save()
+           msg ='profile updated'
+    
+    form = forms.supdateprofile(instance=student)
+    return render(request,'student/studentprof.html',{'form':form,'msg':msg})
+
+
+
+
+
+
 def message(request, recipient_id=None):
     if recipient_id is None:
         return redirect('select_recipient')  # Redirect to recipient selection if no recipient is provided
@@ -110,3 +128,11 @@ def select_recipient(request):
         available_recipients = models.tutor.objects.all()
 
     return render(request, 'select_recipient.html', {'available_recipients': available_recipients})
+
+
+def library(request):
+    documents = models.library.objects.all()
+    return render(request, 'library.html', {'documents': documents})
+
+
+

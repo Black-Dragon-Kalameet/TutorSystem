@@ -11,6 +11,8 @@ urlpatterns =[
     path('message',views.message,name='message'),
     path('select_recipient/', views.select_recipient, name='select_recipient'),
     path('message/<int:recipient_id>/', views.message, name='message'),
+    path('library/', views.library, name='library'),
+    path('student/studentprof/', views.studentprof, name='studentprof'),
 
      
 

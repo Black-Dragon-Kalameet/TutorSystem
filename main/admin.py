@@ -12,3 +12,8 @@ admin.site.register(models.tutor,tutoradmin)
 class caroseladmin(admin.ModelAdmin):
     list_display=('image_tag','alt_text')
 admin.site.register(models.carosel,caroseladmin)
+
+class libraryAdmin(admin.ModelAdmin):
+    list_display = ('title', 'timestamp')
+    search_fields = ('title',)
+admin.site.register(models.library,libraryAdmin)

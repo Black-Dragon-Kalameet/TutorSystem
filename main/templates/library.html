@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Library</h2>
+<ul>
+    {% for doc in documents %}
+        <li>
+            <a href="{{ doc.file.url }}">{{ doc.title }}</a> - {{ doc.timestamp }}
+            <p>{{ doc.description }}</p>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
