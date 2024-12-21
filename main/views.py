@@ -69,14 +69,25 @@ def studentprof(request):
     form = forms.supdateprofile(instance=student)
     return render(request,'student/studentprof.html',{'form':form,'msg':msg})
 
+def logouta(request):
+    if 'tutorlogin' in request.session:
+        del request.session['tutorlogin']
+    if 'tutorid' in request.session:
+        del request.session['tutorid']
+
+    if 'slogin' in request.session:
+        del request.session['slogin']
+    if 'studentid' in request.session:
+        del request.session['studentid']
 
 
+    return redirect('home')  
 
 
 
 def message(request, recipient_id=None):
     if recipient_id is None:
-        return redirect('select_recipient')  # Redirect to recipient selection if no recipient is provided
+        return redirect('select_recipient')  
 
     form = forms.messageform()
     allmessages = []
@@ -121,7 +132,7 @@ def message(request, recipient_id=None):
 def select_recipient(request):
     available_recipients = []
 
-    if request.session['tutorlogin'] == True:
+    if 'tutorlogin' in request.session and request.session['tutorlogin'] == True:
 
         available_recipients = models.student.objects.all()
     else:
@@ -136,3 +147,5 @@ def library(request):
 
 
 
+def contactus(request):
+    return render(request, 'contactus.html')

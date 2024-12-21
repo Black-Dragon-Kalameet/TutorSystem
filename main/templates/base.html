@@ -12,15 +12,22 @@
     <!-- header-->
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="../" style="color: #ffffff">TutorSystem</a>
+        <a class="navbar-brand" href="{% url 'home' %}" style="color: #ffffff">TutorAssist</a>
         
 
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" style="color:#ffffff" role="button" data-bs-toggle="dropdown">Dropdown</a>
             <ul class="dropdown-menu">
+              {% if not request.session.tutorlogin and not request.session.slogin %}
               <li><a class="dropdown-item" href="{% url 'slogin' %}">Student Login</a></li>
               <li><a class="dropdown-item" href="{% url 'tutorlogin' %}">Tutor Login</a></li>
               <li><a class="dropdown-item" href="{% url 'library' %}">library</a></li>
+              {% else %}
+              <li><a class="dropdown-item" href="{% url 'library' %}">library</a></li>
+              <li><a class="dropdown-item" href="{% url 'message' %}">Message</a></li>
+              <li><a class="dropdown-item" href="{% url 'logouta' %}">Logout</a></li>
+
+              {% endif %}
             </ul>
           </li>
 
@@ -35,11 +42,8 @@
     <footer class="container py-5">
         <p class="float-end"><a href="#">Back to top</a></p>
         <p>
-          © 2024 – 2025 TutorSystem, Inc. ·
-          <a href="#">Privacy</a> ·
-          <a href="#">Terms</a> ·
-          <a href="#">FAQ</a> ·
-          <a href="#">Contact Us</a>
+          © 2024 – 2025 TutorAssist, Inc. ·
+          <a href="{% url 'contactus' %}">Contact Us</a>
         </p>
       </footer>
   
