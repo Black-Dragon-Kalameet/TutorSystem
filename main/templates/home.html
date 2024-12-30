@@ -44,7 +44,7 @@
 
       <div class="col-md-4">
         <div class="card">
-          <img src="media/student.png" class="card-img-top" alt="..." />
+          <img src="media/student.png" class="card-img-top" alt="..." style="height: 200px; object-fit: cover;" />
           <div class="card-body">
             <h3 class="card-title">Student Login</h3>
             <p class="card-text">student login from here</p>
@@ -58,7 +58,7 @@
 
       <div class="col-md-4">
         <div class="card">
-          <img src="media/tutor.png" class="card-img-top" alt="..." />
+          <img src="media/tutor.png" class="card-img-top" alt="..." style="height: 200px; object-fit: cover;" />
           <div class="card-body">
             <h3 class="card-title">tutor Login</h3>
             <p class="card-text">tutors login from here</p>
@@ -74,7 +74,7 @@
 
   <div class="col-md-4">
     <div class="card">
-      <img src="media/lib.jpg" class="card-img-top" alt="..." />
+      <img src="media/lib.jpg" class="card-img-top" alt="..." style="height: 200px; object-fit: cover;" />
       <div class="card-body">
         <h3 class="card-title">Library</h3>
         <p class="card-text">Acesss our Educational Liberary</p>
@@ -82,12 +82,26 @@
       </div>
     </div>
   </div>
-</div>
-</section>
+
+
 <!--- lib card ends -->
 
 
+  <!-- faq card starts -->
 
+  <div class="col-md-4">
+    <div class="card">
+      <img src="media/faq.jpg" class="card-img-top" alt="..." style="height: 200px; object-fit: cover;" />
+      <div class="card-body">
+        <h3 class="card-title">FAQ</h3>
+        <p class="card-text">See Frequently Asked questions</p>
+        <a href="{% url 'showfaq' %}" class="btn btn-primary">Click here</a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<!--- lib card ends -->
 
 
 {% endblock %}

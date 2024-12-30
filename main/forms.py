@@ -27,3 +27,9 @@ class supdateprofile(forms.ModelForm):
      class Meta:
           model= models.student
           fields = ('email','phone_number','profile_picture')
+
+
+class faqform(forms.ModelForm):
+    class Meta:
+        model = models.faq
+        fields = ['question','answer']

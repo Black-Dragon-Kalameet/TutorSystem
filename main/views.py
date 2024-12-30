@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth import logout
 
 from . import models
@@ -149,3 +149,27 @@ def library(request):
 
 def contactus(request):
     return render(request, 'contactus.html')
+
+
+def showfaq(request):
+
+    faqs =  models.faq.objects.all()
+
+    return render(request, 'showfaq.html', {'faqs':faqs})
+
+
+def addfaq(request):
+    if request.method == 'POST':
+        form = forms.faqform(request.POST)
+        if form.is_valid():
+            faqq = form.save(commit=False)
+            tutorid =  models.tutor.objects.get(id=request.session['tutorid'])
+            if not tutorid:
+                return redirect('login')
+            faqq.creator = tutorid 
+            faqq.save()
+            return redirect('showfaq')  
+    else:
+        form = forms.faqform()
+
+    return render(request, 'addfaq.html', {'form': form})

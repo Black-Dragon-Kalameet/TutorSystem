@@ -58,3 +58,12 @@ class library(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class faq(models.Model):
+    question = models.CharField(max_length=200)
+    answer = models.CharField(max_length=200)
+    creator = models.ForeignKey(tutor,on_delete=models.CASCADE)
+
+    def __str__(self):
+     return self.question

@@ -15,9 +15,8 @@ urlpatterns =[
     path('student/studentprof/', views.studentprof, name='studentprof'),
     path('logouta/', views.logouta, name='logouta'),
     path('contactus/', views.contactus, name='contactus'),
-    
-
-     
+    path('showfaq', views.showfaq, name='showfaq'),
+    path('addfaq', views.addfaq, name='addfaq'),
 
 ]
 #If DEBUG is True, serve media files (like images) during development

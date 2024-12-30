@@ -18,14 +18,21 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" style="color:#ffffff" role="button" data-bs-toggle="dropdown">Dropdown</a>
             <ul class="dropdown-menu">
+
+
               {% if not request.session.tutorlogin and not request.session.slogin %}
               <li><a class="dropdown-item" href="{% url 'slogin' %}">Student Login</a></li>
               <li><a class="dropdown-item" href="{% url 'tutorlogin' %}">Tutor Login</a></li>
               <li><a class="dropdown-item" href="{% url 'library' %}">library</a></li>
+             
               {% else %}
               <li><a class="dropdown-item" href="{% url 'library' %}">library</a></li>
               <li><a class="dropdown-item" href="{% url 'message' %}">Message</a></li>
+              <li><a class="dropdown-item" href="{% url 'showfaq' %}">show faq</a></li>
               <li><a class="dropdown-item" href="{% url 'logouta' %}">Logout</a></li>
+              {% if request.session.tutorlogin %}
+              <li><a class="dropdown-item" href="{% url 'addfaq' %}">add faq</a></li>
+              {% endif %}
 
               {% endif %}
             </ul>
