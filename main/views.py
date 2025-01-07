@@ -179,7 +179,7 @@ def editfaq(request, id):
         form = forms.faqform(request.POST, instance=faqq)
         if form.is_valid():
             form.save()
-            return redirect('addfaq')  # Redirect back to Add page after editing
+            return redirect('addfaq')  
     else:
         form = forms.faqform(instance=faqq)
 
@@ -227,9 +227,9 @@ def addquestion(request, test_id):
         form = forms.qform(request.POST)
         if form.is_valid():
             question = form.save(commit=False)
-            question.test = test  # Link the question to the selected test
+            question.test = test  
             question.save()
-            return redirect('addquestion', test_id=test.id)  # Redirect to the same page after saving
+            return redirect('addquestion', test_id=test.id)  
     else:
         form = forms.qform()
 
@@ -271,9 +271,6 @@ def viewtest(request, test_id):
 
     return render(request, 'tests/viewtest.html', {'test': test, 'questions': questions})
 
-
-from django.shortcuts import render, get_object_or_404, redirect
-from . import models
 
 def answertest(request, test_id):
     
