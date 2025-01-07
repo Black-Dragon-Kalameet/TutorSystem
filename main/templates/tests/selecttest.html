@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-
-  <h2>Select a Test</h2>
-  <ul class="list-group">
-    {% for test in tests %}
-      <li class="list-group-item">
-        <a href="{% url 'viewtest' test.id %}">{{ test.testname }}</a>
-        <p>answered by {{test.examinee}} at {{test.timestamp}}</p>
-      </li>
-    {% endfor %}
-  </ul>
+<div class="container mt-4">
+    <h2 class="mb-4">Select a Test</h2>
+    <div class="list-group">
+        {% for test in tests %}
+            <div class="list-group-item">
+                <h5 class="mb-1">
+                    <a href="{% url 'viewtest' test.id %}" class="btn btn-link">{{ test.testname }}</a>
+                </h5>
+                <p class="mb-1">Answered by: <strong>{{ test.examinee }}</strong></p>
+                <small class="text-muted">At: {{ test.timestamp }}</small>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

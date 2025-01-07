@@ -74,6 +74,7 @@ class test(models.Model):
     testname = models.CharField(max_length=200) 
     examinee = models.ForeignKey(student, on_delete=models.SET_NULL, blank=True, null=True)
     timestamp = models.DateTimeField(default=timezone.now)
+    completed = models.BooleanField(default=False)
 
     def __str__(self):
      return self.testname

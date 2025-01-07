@@ -28,6 +28,7 @@ urlpatterns =[
     path('viewtest/<int:test_id>/', views.viewtest, name='viewtest'),
     path('selecttest2/', views.selecttest2, name='selecttest2'),
     path('answertest/<int:test_id>/', views.answertest, name='answertest'),
+    path('sendann', views.sendann, name= 'sendann'),
 
 
 

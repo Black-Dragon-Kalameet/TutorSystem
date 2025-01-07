@@ -284,7 +284,6 @@ def answertest(request, test_id):
 
         if not test.examinee:
             test.examinee = examinee
-            test.timestamp = timezone.now()
             test.save()
 
     if request.method == 'POST':
@@ -294,9 +293,11 @@ def answertest(request, test_id):
             if answer:
                 question.answerw = answer  
                 question.save()
+
+        test.completed = True    
         test.timestamp = timezone.now()
         test.save()
-        return redirect('home')
+        return redirect('viewtest', test_id=test.id)
     return render(request, 'tests/answertest.html', {'test': test, 'questions': questions})
 
 
@@ -304,3 +305,21 @@ def selecttest2(request):
     tests = models.test.objects.all()
 
     return render(request, 'tests/selecttest2.html', {'tests': tests})
+
+
+def sendann(request):
+    students = models.student.objects.all()
+    tutor = request.session['tutorid']
+    
+    if request.method == 'POST':
+        for student in students:
+            form = forms.messageform(request.POST)
+            
+            if form.is_valid():
+                message = form.save(commit=False)
+                message.receiver_student = student  
+                message.sender_tutor = models.tutor.objects.get(id=tutor)  
+                message.save()
+                
+    form = forms.messageform()  
+    return render(request, 'sendann.html', {'form': form})

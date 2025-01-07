@@ -4,7 +4,14 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-12">
-            <h2 class="mb-3">Chat with {{ recipient.username }}</h2>
+            <h2 class="mb-3">Chat with {% if recipient.Student_name %}
+                {{ recipient.Student_name }}
+            {% elif recipient.tutorname %}
+                {{ recipient.tutorname }}
+            {% else %}
+                Unknown Recipient
+            {% endif %}
+            </h2>
             <a href="{% url 'select_recipient' %}" class="btn btn-secondary btn-sm">Back to Recipients</a>
         </div>
     </div>
@@ -30,9 +37,9 @@
                         <div class="message p-2 rounded bg-light">
                             <p class="mb-1"><strong>
                                 {% if msg.sender_tutor %}
-                                    {{ msg.sender_tutor.username }}
+                                    {{ msg.sender_tutor.tutorname }}
                                 {% else %}
-                                    {{ msg.sender_student.username }}
+                                    {{ msg.sender_student.Student_name }}
                                 {% endif %}
                             </strong></p>
                             <p class="mb-1">{{ msg.message }}</p>

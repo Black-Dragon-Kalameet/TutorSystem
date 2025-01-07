@@ -28,17 +28,23 @@
               {% else %}
               
               <li><a class="dropdown-item" href="{% url 'selecttest' %}">View tests</a></li>
-              <li><a class="dropdown-item" href="{% url 'selecttest2' %}">answer test</a></li>
               <li><a class="dropdown-item" href="{% url 'library' %}">library</a></li>
               <li><a class="dropdown-item" href="{% url 'message' %}">Message</a></li>
               <li><a class="dropdown-item" href="{% url 'showfaq' %}">show faq</a></li>
+              {% endif %}
+              {% if request.session.slogin %}
+              <li><a class="dropdown-item" href="{% url 'selecttest2' %}">answer test</a></li>
+              {% endif %}
               {% if request.session.tutorlogin %}
               <li><a class="dropdown-item" href="{% url 'addfaq' %}">add faq</a></li>
               <li><a class="dropdown-item" href="{% url 'addtests' %}">add test</a></li>
+              <li><a class="dropdown-item" href="{% url 'sendann' %}">Announce</a></li>
               {% endif %}
 
-              {% endif %}
+              {% if request.session.tutorlogin or request.session.slogin %}
               <li><a class="dropdown-item" href="{% url 'logouta' %}">Logout</a></li>
+              {% endif %}
+
             </ul>
           </li>
 

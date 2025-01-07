@@ -5,7 +5,7 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Save FAQ</button>
+    <button type="submit" class="btn btn-primary">Save FAQ</button>
 </form>
 
 <hr>
@@ -25,9 +25,9 @@
             <td>{{ faq.question }}</td>
             <td>{{ faq.answer }}</td>
             <td>
-                <a href="{% url 'editfaq' faq.id %}">Edit</a>
+                <a href="{% url 'editfaq' faq.id %}"class="btn btn-primary btn-sm">Edit</a>
                 |
-                <a href="{% url 'deletefaq' faq.id %}" onclick="return confirm('Are you sure you want to delete this FAQ?')">Delete</a>
+                <a href="{% url 'deletefaq' faq.id %}" onclick="return confirm('Are you sure you want to delete this FAQ?')"class="btn btn-primary btn-sm">Delete</a>
             </td>
         </tr>
         {% endfor %}

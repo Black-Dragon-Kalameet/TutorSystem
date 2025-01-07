@@ -5,8 +5,13 @@
   <ul class="list-group">
     {% for test in tests %}
       <li class="list-group-item">
-        <a href="{% url 'answertest' test.id %}">{{ test.testname }}</a>
+        {% if test.completed %}
+          <span class="text-muted">{{ test.testname }} (Completed)</span> 
+        {% else %}
+          <a href="{% url 'answertest' test.id %}">{{ test.testname }}</a> 
+        {% endif %}
       </li>
     {% endfor %}
   </ul>
+  
 {% endblock %}

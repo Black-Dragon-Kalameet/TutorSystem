@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
+
 {% block content %}
+  <div class="container mt-4">
+    <h2 class="mb-4">Select a Recipient</h2>
 
-<h2>Select a Recipient</h2>
-<ul>
-    {% for recipient in available_recipients %}
-    <li>
-        <a href="{% url 'message' recipient.id %}">{{ recipient.username }}</a>
-    </li>
-    {% endfor %}
-</ul>
-
+    <ul class="list-group">
+      {% for recipient in available_recipients %}
+        <li class="list-group-item">
+          <a href="{% url 'message' recipient.id %}" class="text-decoration-none">{% if recipient.Student_name %}
+            {{ recipient.Student_name }}
+        {% elif recipient.tutorname %}
+            {{ recipient.tutorname }}
+        {% else %}
+            Unknown Recipient
+        {% endif %}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}

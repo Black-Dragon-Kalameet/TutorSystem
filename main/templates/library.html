@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Library</h2>
-<ul>
-    {% for doc in documents %}
-        <li>
-            <a href="{{ doc.file.url }}">{{ doc.title }}</a> - {{ doc.timestamp }}
-            <p>{{ doc.description }}</p>
-        </li>
-    {% endfor %}
-</ul>
+<div class="container mt-4">
+    <h2 class="mb-4">Library</h2>
+    <div class="list-group">
+        {% for doc in documents %}
+            <div class="list-group-item">
+                <h5 class="mb-1">
+                    <a href="{{ doc.file.url }}" class="btn btn-link">{{ doc.title }}</a>
+                </h5>
+                <p class="mb-1">{{ doc.description }}</p>
+                <small class="text-muted">{{ doc.timestamp }}</small>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
