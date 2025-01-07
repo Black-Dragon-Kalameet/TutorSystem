@@ -1,17 +1,32 @@
 {% extends 'base.html' %}
 {% block content %}
+<h2>Add/Delete Test</h2>
+
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Save Test</button>
+    <button type="submit">Add test</button>
 </form>
 
-<h2>Select a test</h2>
-<ul>
-    {% for test in alltests %}
-    <li>
-        <a href="{% url 'addquestion' test.id %}">{{ test.testname }}</a>
-    </li>
-    {% endfor %}
-</ul>
+<hr>
+
+<h3>Existing Tests</h3>
+<table>
+    <thead>
+        <tr>
+            <th>TestName|</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for test in alltests %}
+        <tr>
+            <td><a href="{% url 'addquestion' test.id %}">{{ test.testname }}</a></td>
+            <td>
+                <a href="{% url 'deletetest' test.id %}" onclick="return confirm('Are you sure you want to delete this Test?')">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

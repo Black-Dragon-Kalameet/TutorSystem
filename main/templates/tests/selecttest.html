@@ -6,7 +6,7 @@
     {% for test in tests %}
       <li class="list-group-item">
         <a href="{% url 'viewtest' test.id %}">{{ test.testname }}</a>
-        <p>answered by {{test.examinee}}</p>
+        <p>answered by {{test.examinee}} at {{test.timestamp}}</p>
       </li>
     {% endfor %}
   </ul>

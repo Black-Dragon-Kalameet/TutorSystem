@@ -214,10 +214,15 @@ def addtest(request):
     return render(request, 'tests/addtests.html', {'form': form, 'alltests':alltests})
 
 
+def deletetest(request, id):
+    test = models.test.objects.get(id=id)
+    test.delete()
+    return redirect('tests/addtests.html')
 
 def addquestion(request, test_id):
+    
     test = models.test.objects.get(id=test_id)
-
+    questions = test.questions.all()
     if request.method == 'POST':
         form = forms.qform(request.POST)
         if form.is_valid():
@@ -228,7 +233,30 @@ def addquestion(request, test_id):
     else:
         form = forms.qform()
 
-    return render(request, 'tests/addquestion.html', {'form': form, 'test': test})
+    return render(request, 'tests/addquestion.html', {'form': form, 'test': test, 'questions': questions})
+
+def deletequestion(request, id,test_id):
+    test = models.test.objects.get(id=test_id)
+    question = models.quesntione.objects.get(id=id)
+    question.delete()
+    return redirect('addquestion', test_id=test.id)
+
+
+def editquestion(request, id, test_id):
+    test = models.test.objects.get(id=test_id)
+    question = models.quesntione.objects.get(id=id)
+
+    if request.method == 'POST':
+        form = forms.qform(request.POST, instance=question)
+        if form.is_valid():
+            form.save()
+            return redirect('addquestion', test_id=test.id)  
+    else:
+        form = forms.qform(instance=question)
+
+    questions = models.quesntione.objects.filter(test=test)
+
+    return render(request, 'tests/addquestion.html', {'form': form,'questions': questions,'test': test})
 
 
 def selecttest(request):
@@ -259,6 +287,7 @@ def answertest(request, test_id):
 
         if not test.examinee:
             test.examinee = examinee
+            test.timestamp = timezone.now()
             test.save()
 
     if request.method == 'POST':
@@ -268,7 +297,8 @@ def answertest(request, test_id):
             if answer:
                 question.answerw = answer  
                 question.save()
-
+        test.timestamp = timezone.now()
+        test.save()
         return redirect('home')
     return render(request, 'tests/answertest.html', {'test': test, 'questions': questions})
 
