@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Answer Questions for {{ test.testname }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      {% for question in questions %}
+        <div class="mb-3">
+          <label for="answer_{{ question.id }}" class="form-label">{{ question.quesntionw }}</label>
+          <input type="text" class="form-control" id="answer_{{ question.id }}" name="answer_{{ question.id }}" placeholder="Your answer here" value="{{ question.user_answer }}">
+        </div>
+      {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Answers</button>
+  </form>
+{% endblock %}

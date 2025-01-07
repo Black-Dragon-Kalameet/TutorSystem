@@ -17,6 +17,16 @@ urlpatterns =[
     path('contactus/', views.contactus, name='contactus'),
     path('showfaq', views.showfaq, name='showfaq'),
     path('addfaq', views.addfaq, name='addfaq'),
+    path('faqs/edit/<int:id>/', views.editfaq, name='editfaq'),
+    path('faqs/delete/<int:id>/', views.deletefaq, name='deletefaq'),
+    path('tests/addtests/', views.addtest, name='addtests'),
+    path('tests/addquestion/<int:test_id>', views.addquestion, name='addquestion'),
+    path('selecttest/', views.selecttest, name='selecttest'),
+    path('viewtest/<int:test_id>/', views.viewtest, name='viewtest'),
+    path('selecttest2/', views.selecttest2, name='selecttest2'),
+    path('answertest/<int:test_id>/', views.answertest, name='answertest'),
+
+
 
 ]
 #If DEBUG is True, serve media files (like images) during development

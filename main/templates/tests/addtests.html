@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Test</button>
+</form>
+
+<h2>Select a test</h2>
+<ul>
+    {% for test in alltests %}
+    <li>
+        <a href="{% url 'addquestion' test.id %}">{{ test.testname }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

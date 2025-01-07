@@ -67,3 +67,20 @@ class faq(models.Model):
 
     def __str__(self):
      return self.question
+
+
+
+class test(models.Model):
+    testname = models.CharField(max_length=200) 
+    examinee = models.ForeignKey(student, on_delete=models.SET_NULL, blank=True, null=True)   
+
+    def __str__(self):
+     return self.testname
+    
+class quesntione(models.Model):
+   quesntionw = models.CharField(max_length=200)
+   answerw = models.CharField(max_length=200)
+   test = models.ForeignKey(test, related_name='questions', on_delete=models.CASCADE)
+
+   def __str__(self):
+     return self.quesntionw

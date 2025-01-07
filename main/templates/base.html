@@ -26,15 +26,19 @@
               <li><a class="dropdown-item" href="{% url 'library' %}">library</a></li>
              
               {% else %}
+              
+              <li><a class="dropdown-item" href="{% url 'selecttest' %}">View tests</a></li>
+              <li><a class="dropdown-item" href="{% url 'selecttest2' %}">answer test</a></li>
               <li><a class="dropdown-item" href="{% url 'library' %}">library</a></li>
               <li><a class="dropdown-item" href="{% url 'message' %}">Message</a></li>
               <li><a class="dropdown-item" href="{% url 'showfaq' %}">show faq</a></li>
-              <li><a class="dropdown-item" href="{% url 'logouta' %}">Logout</a></li>
               {% if request.session.tutorlogin %}
               <li><a class="dropdown-item" href="{% url 'addfaq' %}">add faq</a></li>
+              <li><a class="dropdown-item" href="{% url 'addtests' %}">add test</a></li>
               {% endif %}
 
               {% endif %}
+              <li><a class="dropdown-item" href="{% url 'logouta' %}">Logout</a></li>
             </ul>
           </li>
 

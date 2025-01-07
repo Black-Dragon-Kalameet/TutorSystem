@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <h2>Select a Test</h2>
+  <ul class="list-group">
+    {% for test in tests %}
+      <li class="list-group-item">
+        <a href="{% url 'viewtest' test.id %}">{{ test.testname }}</a>
+        <p>answered by {{test.examinee}}</p>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <h2>{{ test.testname }}</h2>
+
+  <h3>Questions and Answers</h3>
+  <ul class="list-group">
+    {% for question in questions %}
+      <li class="list-group-item">
+        <strong>{{ question.quesntionw }}</strong>
+        <p><strong>Answer:</strong> {{ question.answerw }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -122,11 +122,7 @@ def message(request, recipient_id=None):
             message_instance.save()
             return redirect('message', recipient_id=recipient_id)
 
-    return render(request, 'message.html', {
-        'allmessages': allmessages,
-        'form': form,
-        'recipient': recipient,
-    })
+    return render(request, 'message.html', {'allmessages': allmessages,'form': form,'recipient': recipient,})
 
 
 def select_recipient(request):
@@ -165,11 +161,119 @@ def addfaq(request):
             faqq = form.save(commit=False)
             tutorid =  models.tutor.objects.get(id=request.session['tutorid'])
             if not tutorid:
-                return redirect('login')
+                return redirect('home')
             faqq.creator = tutorid 
             faqq.save()
             return redirect('showfaq')  
     else:
         form = forms.faqform()
 
-    return render(request, 'addfaq.html', {'form': form})
+    faqs = models.faq.objects.all()
+    return render(request, 'addfaq.html', {'form': form, 'faqs': faqs})
+
+
+
+def editfaq(request, id):
+    faqq = models.faq.objects.get(id=id)
+    if request.method == 'POST':
+        form = forms.faqform(request.POST, instance=faqq)
+        if form.is_valid():
+            form.save()
+            return redirect('addfaq')  # Redirect back to Add page after editing
+    else:
+        form = forms.faqform(instance=faqq)
+
+    faqs = models.faq.objects.all()
+    return render(request, 'addfaq.html', {'form': form, 'faqs': faqs})
+
+
+
+
+def deletefaq(request, id):
+    faqq = models.faq.objects.get(id=id)
+    faqq.delete()
+    return redirect('showfaq')
+
+
+
+def addtest(request):
+    alltests = models.test.objects.all() 
+
+    if request.method == 'POST':
+        form = forms.testform(request.POST) 
+        if form.is_valid():
+
+            new_test = form.save(commit=False)
+            new_test.save()  
+
+
+            return redirect('addtests')  
+    else:
+        form = forms.testform()  
+
+    return render(request, 'tests/addtests.html', {'form': form, 'alltests':alltests})
+
+
+
+def addquestion(request, test_id):
+    test = models.test.objects.get(id=test_id)
+
+    if request.method == 'POST':
+        form = forms.qform(request.POST)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.test = test  # Link the question to the selected test
+            question.save()
+            return redirect('addquestion', test_id=test.id)  # Redirect to the same page after saving
+    else:
+        form = forms.qform()
+
+    return render(request, 'tests/addquestion.html', {'form': form, 'test': test})
+
+
+def selecttest(request):
+    tests = models.test.objects.all()
+
+    return render(request, 'tests/selecttest.html', {'tests': tests})
+
+def viewtest(request, test_id):
+    test = models.test.objects.get(id=test_id)
+    
+    questions = test.questions.all()
+
+    return render(request, 'tests/viewtest.html', {'test': test, 'questions': questions})
+
+
+from django.shortcuts import render, get_object_or_404, redirect
+from . import models
+
+def answertest(request, test_id):
+    
+    test = models.test.objects.get(id=test_id)
+    questions = test.questions.all()
+
+    if 'slogin' in request.session and request.session['slogin'] == True:
+        examerid = request.session.get('studentid')
+        
+        examinee = models.student.objects.get(id=examerid)
+
+        if not test.examinee:
+            test.examinee = examinee
+            test.save()
+
+    if request.method == 'POST':
+        for question in questions:
+            answer_key = f'answer_{question.id}'
+            answer = request.POST.get(answer_key)
+            if answer:
+                question.answerw = answer  
+                question.save()
+
+        return redirect('home')
+    return render(request, 'tests/answertest.html', {'test': test, 'questions': questions})
+
+
+def selecttest2(request):
+    tests = models.test.objects.all()
+
+    return render(request, 'tests/selecttest2.html', {'tests': tests})

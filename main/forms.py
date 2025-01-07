@@ -33,3 +33,19 @@ class faqform(forms.ModelForm):
     class Meta:
         model = models.faq
         fields = ['question','answer']
+
+
+class testform(forms.ModelForm):
+     class Meta:
+          model = models.test
+          fields = ['testname']
+
+class qform(forms.ModelForm):
+     class Meta: 
+          model = models.quesntione
+          fields = ['quesntionw']
+
+class ansform(forms.ModelForm):
+     class Meta: 
+          model = models.quesntione
+          fields = ['answerw']
