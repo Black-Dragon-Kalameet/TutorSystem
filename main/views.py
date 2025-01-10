@@ -5,7 +5,6 @@ from . import models
 from . import forms
 from django.utils import timezone
 
-# Create your views here.
 def home(request):
      carosels = models.carosel.objects.all()
 
@@ -23,8 +22,9 @@ def tutorlogin(request):
                     tutor = models.tutor.objects.filter(username=username, password=password).first()
                     request.session['tutorlogin'] = True
                     request.session['tutorid'] = tutor.id
+                    request.session['name'] = tutor.tutorname
                     print("User authenticated:", request.user.is_authenticated)
-                    return redirect('message')
+                    return redirect('home')
         else:
          return redirect('tutor/tutorlogin')
     form = forms.tutorloginform
@@ -46,8 +46,9 @@ def slogin(request):
             student = models.student.objects.get(username=username,password=password)
             request.session['slogin'] = True
             request.session['studentid'] = student.id
+            request.session['name'] = student.Student_name
             print("User authenticated:", request.user.is_authenticated)
-            return redirect('message')
+            return redirect('home')
 
 
         except models.student.DoesNotExist:
@@ -69,18 +70,33 @@ def studentprof(request):
     form = forms.supdateprofile(instance=student)
     return render(request,'student/studentprof.html',{'form':form,'msg':msg})
 
+def tutorprofile(request):
+    msg =None
+    tutorid =  request.session['tutorid']
+    tutor = models.tutor.objects.get(id=tutorid)
+    if request.method == 'POST':
+       form = forms.tutorupdateprofile(request.POST,request.FILES,instance=tutor)
+       if form.is_valid:
+           form.save()
+           msg ='profile updated'
+    
+    form = forms.tutorupdateprofile(instance=tutor)
+    return render(request,'tutor/tutorprofile.html',{'form':form,'msg':msg})
+
 def logouta(request):
     if 'tutorlogin' in request.session:
         del request.session['tutorlogin']
     if 'tutorid' in request.session:
         del request.session['tutorid']
-
+    if 'name' in request.session:
+        del request.session['name']
     if 'slogin' in request.session:
         del request.session['slogin']
     if 'studentid' in request.session:
         del request.session['studentid']
-
-
+    if 'name' in request.session:
+        del request.session['name']
+        
     return redirect('home')  
 
 

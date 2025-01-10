@@ -28,6 +28,10 @@ class supdateprofile(forms.ModelForm):
           model= models.student
           fields = ('email','phone_number','profile_picture')
 
+class tutorupdateprofile(forms.ModelForm):
+     class Meta:
+          model= models.tutor
+          fields = ('email','phone_number','profile_picture')
 
 class faqform(forms.ModelForm):
     class Meta:

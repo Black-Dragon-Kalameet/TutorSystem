@@ -7,6 +7,10 @@ class tutor(models.Model):
     tutorname = models.CharField(max_length=180)
     username = models.CharField(null=False)
     password=models.CharField(null=False)
+    email = models.EmailField(unique=True)
+    phone_number = models.CharField(max_length=15)
+    date_of_birth = models.DateField()
+    profile_picture = models.ImageField(upload_to='profiles/', null=True, blank=True)
     subjects = [('Mat','Math'),('Sci','Science'),('Eng','English')]
     
     subject = models.CharField(max_length=3,choices=subjects,default='Eng')

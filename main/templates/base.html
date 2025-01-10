@@ -14,6 +14,12 @@
     <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}" style="color: #ffffff">TutorAssist</a>
         
+        {% if request.session.tutorlogin or request.session.slogin %}
+            <span class="navbar-text" style="color: #ffffff; margin-right: 15px;">
+                Hello, {{ request.session.name }}
+            </span>
+        {% endif %}
+        
 
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" style="color:#ffffff" role="button" data-bs-toggle="dropdown">Menu</a>
@@ -34,11 +40,13 @@
               {% endif %}
               {% if request.session.slogin %}
               <li><a class="dropdown-item" href="{% url 'selecttest2' %}">answer test</a></li>
+              <li><a class="dropdown-item" href="{% url 'studentprof' %}">update profile</a></li>
               {% endif %}
               {% if request.session.tutorlogin %}
               <li><a class="dropdown-item" href="{% url 'addfaq' %}">add faq</a></li>
               <li><a class="dropdown-item" href="{% url 'addtests' %}">add test</a></li>
               <li><a class="dropdown-item" href="{% url 'sendann' %}">Announce</a></li>
+              <li><a class="dropdown-item" href="{% url 'tutorprofile' %}">update profile</a></li>
               {% endif %}
 
               {% if request.session.tutorlogin or request.session.slogin %}

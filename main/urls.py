@@ -29,6 +29,7 @@ urlpatterns =[
     path('selecttest2/', views.selecttest2, name='selecttest2'),
     path('answertest/<int:test_id>/', views.answertest, name='answertest'),
     path('sendann', views.sendann, name= 'sendann'),
+    path('tutor/tutorprofile', views.tutorprofile, name= 'tutorprofile'),
 
 
 
