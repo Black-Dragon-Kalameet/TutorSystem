@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %} 
+
+<h1>{{ tutor.tutorname }}'s Profile</h1>
+
+{% if tutor.profile_picture %}
+    <img src="{{ tutor.profile_picture.url }}" alt="Profile Picture" style="height: 200px; object-fit: cover;">
+{% else %}
+    <p>No profile picture available.</p>
+{% endif %}
+
+<table class="table">
+    <tr>
+        <th>Email</th>
+        <td>{{ tutor.email }}</td>
+    </tr>
+    <tr>
+        <th>Phone Number</th>
+        <td>{{ tutor.phone_number }}</td>
+    </tr>
+    <tr>
+        <th>Date of Birth</th>
+        <td>{{ tutor.date_of_birth }}</td>
+    </tr>
+</table>
+
+{% endblock %}

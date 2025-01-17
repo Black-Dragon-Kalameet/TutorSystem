@@ -5,9 +5,13 @@
     <div class="row">
         <div class="col-md-12">
             <h2 class="mb-3">Chat with {% if recipient.Student_name %}
-                {{ recipient.Student_name }}
+                <a href="{% url 'sviewprofile' recipient.id %}" class="text-dark text-decoration-underline">
+                    {{ recipient.Student_name }}
+                </a>
             {% elif recipient.tutorname %}
+            <a href="{% url 'vtutorprof' recipient.id %}" class="text-dark text-decoration-underline">
                 {{ recipient.tutorname }}
+            </a>
             {% else %}
                 Unknown Recipient
             {% endif %}

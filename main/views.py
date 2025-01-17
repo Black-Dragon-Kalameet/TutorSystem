@@ -83,6 +83,18 @@ def tutorprofile(request):
     form = forms.tutorupdateprofile(instance=tutor)
     return render(request,'tutor/tutorprofile.html',{'form':form,'msg':msg})
 
+
+def viewprofilestudent(request, id):    
+    student = models.student.objects.get(id=id)
+    return render(request,'student/sviewprofile.html',{'student':student})
+
+
+def vtutorprof(request, id):    
+    tutor = models.tutor.objects.get(id=id)
+    return render(request,'tutor/vtutorprof.html',{'tutor':tutor})
+
+
+
 def logouta(request):
     if 'tutorlogin' in request.session:
         del request.session['tutorlogin']

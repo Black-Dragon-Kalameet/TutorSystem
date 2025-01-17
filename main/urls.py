@@ -30,6 +30,8 @@ urlpatterns =[
     path('answertest/<int:test_id>/', views.answertest, name='answertest'),
     path('sendann', views.sendann, name= 'sendann'),
     path('tutor/tutorprofile', views.tutorprofile, name= 'tutorprofile'),
+    path('student/sviewprofile/<int:id>/', views.viewprofilestudent, name ='sviewprofile'),
+    path('tutor/vtutorprof/<int:id>/', views.vtutorprof, name ='vtutorprof')
 
 
 

@@ -26,12 +26,12 @@ class messageform(forms.ModelForm):
 class supdateprofile(forms.ModelForm):
      class Meta:
           model= models.student
-          fields = ('email','phone_number','profile_picture')
+          fields = ('email','phone_number','profile_picture','password')
 
 class tutorupdateprofile(forms.ModelForm):
      class Meta:
           model= models.tutor
-          fields = ('email','phone_number','profile_picture')
+          fields = ('email','phone_number','profile_picture','password')
 
 class faqform(forms.ModelForm):
     class Meta:
