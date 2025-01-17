@@ -31,7 +31,14 @@ urlpatterns =[
     path('sendann', views.sendann, name= 'sendann'),
     path('tutor/tutorprofile', views.tutorprofile, name= 'tutorprofile'),
     path('student/sviewprofile/<int:id>/', views.viewprofilestudent, name ='sviewprofile'),
-    path('tutor/vtutorprof/<int:id>/', views.vtutorprof, name ='vtutorprof')
+    path('tutor/vtutorprof/<int:id>/', views.vtutorprof, name ='vtutorprof'),
+    path('adminlogin', views.adminlogin, name ='adminlogin'),
+    path('adminpanel', views.adminpanel, name ='adminpanel'),
+    path('addstudent', views.addstudent, name ='addstudent'),
+    path('delstudent/<int:id>/', views.delstudent, name ='delstudent'),
+    path('addtutor', views.addtutor, name ='addtutor'),
+    path('deltutor/<int:id>/', views.deltutor, name ='deltutor'),
+
 
 
 

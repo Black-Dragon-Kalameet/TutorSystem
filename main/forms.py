@@ -4,6 +4,12 @@ from django import forms
 from . import models
 
 
+class adminlog(forms.ModelForm):
+     class Meta:
+          model= models.admin
+          fields = ('name','password')
+
+
 class sloginform(forms.ModelForm):
      class Meta:
           model= models.student
@@ -22,6 +28,15 @@ class messageform(forms.ModelForm):
         fields = ['message', 'attachment']
         receiver = forms.ChoiceField() 
 
+class addstudent(forms.ModelForm):
+     class Meta:
+          model= models.student
+          fields = ['Student_name', 'username', 'email', 'phone_number', 'date_of_birth', 'profile_picture','password']
+
+class addtutor(forms.ModelForm):
+     class Meta:
+          model= models.tutor
+          fields = ['tutorname', 'username', 'email', 'phone_number', 'date_of_birth', 'profile_picture','password','subject']
      
 class supdateprofile(forms.ModelForm):
      class Meta:

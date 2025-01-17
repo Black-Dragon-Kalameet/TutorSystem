@@ -31,6 +31,14 @@ class student(models.Model):
     def __str__(self):
      return self.Student_name
 
+
+class admin(models.Model):
+    name = models.CharField(max_length=180, null=False)
+    password = models.CharField(max_length=180, null=False)
+    def __str__(self):
+     return self.name
+
+
 class carosel(models.Model):
     img=models.ImageField(upload_to="carosel/")
     alt_text=models.CharField(max_length=150)

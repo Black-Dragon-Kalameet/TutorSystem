@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'bootstrap-icons/font/bootstrap-icons.css' %}" rel="stylesheet" />
+  </head>
+
+{% block content %}
+  <div class="container mt-4">
+    <h2 class="mb-4">Actions</h2>
+    
+    <div class="list-group">
+        <div class="list-group-item">
+          <h5> <a class="mb-1" href="{% url 'addstudent' %}">Student management</a> </h5>
+          <h5> <a class="mb-1" href="{% url 'addtutor' %}">Tutor management</a> </h5>
+        </div>
+    </div>
+  </div>
+
+  <footer class="container py-5">
+    <p>
+      <a href="{% url 'home' %}">Return to Site</a>
+      <a href="{% url 'adminpanel' %}">Return to admin panel</a>
+    </p>
+    <button onclick="window.history.back();" class="btn btn-secondary">Back</button>
+  </footer>
+{% endblock %}

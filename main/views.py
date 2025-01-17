@@ -12,6 +12,25 @@ def home(request):
 
 
 
+def adminlogin(request):
+    message = ''
+
+    if request.method == 'POST':
+        name = request.POST['name']
+        password = request.POST['password']
+
+        try:
+            admin = models.admin.objects.get(name=name,password=password)
+            return redirect('adminpanel')
+
+
+        except models.admin.DoesNotExist:
+            message ='wrong'
+
+    form = forms.adminlog
+    return render(request,'adminlogin.html',{'form':form, 'message': message})
+
+
 def tutorlogin(request):
     if request.method =='POST':
         username = request.POST['username']
@@ -32,7 +51,8 @@ def tutorlogin(request):
 
 
 
-
+def adminpanel(request):
+    return render(request, 'adminpanel.html')
 
 
 def slogin(request):
@@ -111,6 +131,41 @@ def logouta(request):
         
     return redirect('home')  
 
+def addstudent(request):
+    students = models.student.objects.all()
+
+    if request.method == 'POST':
+        form = forms.addstudent(request.POST, request.FILES)
+        if form.is_valid():
+            form.save() 
+    else:
+        form = forms.addstudent()
+
+    return render(request, 'addstudent.html', {'form': form, 'students':students})
+
+
+def delstudent(request, id):
+    student = models.student.objects.get(id=id)
+    student.delete()
+    return redirect('addstudent') 
+
+def addtutor(request):
+    tutors = models.tutor.objects.all()
+
+    if request.method == 'POST':
+        form = forms.addtutor(request.POST, request.FILES)
+        if form.is_valid():
+            form.save() 
+    else:
+        form = forms.addtutor()
+
+    return render(request, 'addtutor.html', {'form': form, 'tutors':tutors})
+
+
+def deltutor(request, id):
+    tutor = models.tutor.objects.get(id=id)
+    tutor.delete()
+    return redirect('addtutor') 
 
 
 def message(request, recipient_id=None):
