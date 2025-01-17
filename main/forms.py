@@ -68,3 +68,9 @@ class ansform(forms.ModelForm):
      class Meta: 
           model = models.quesntione
           fields = ['answerw']
+
+
+class addbook(forms.ModelForm):
+    class Meta:
+        model = models.library
+        fields = ['file', 'title', 'description']

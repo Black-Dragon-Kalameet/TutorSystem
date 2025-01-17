@@ -1,0 +1,64 @@
+{% block content %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'bootstrap-icons/font/bootstrap-icons.css' %}" rel="stylesheet" />
+  </head>
+<h2>Add/Edit books</h2>
+
+<form method="post" action="" enctype="multipart/form-data">
+    <table class="table table-bordered">
+        {% csrf_token %}
+        {{ form.as_table }}
+        <tr>
+            <td colspan="2">
+                <input type="submit" class="btn btn-primary" value="Add/Edit Book" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+
+<h3>Existing Library Books</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>File</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.description }}</td>
+            <td>
+                {% if book.file %}
+                <a href="{{ book.file.url }}" target="_blank">View File</a>
+                {% else %}
+                No file uploaded
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'editbooks' book.id %}" class="btn btn-primary btn-sm">Edit</a>
+                |
+                <a href="{% url 'deletebook' book.id %}" onclick="return confirm('Are you sure you want to delete this book?')" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<footer class="container py-5">
+    <p>
+      <a href="{% url 'home' %}">Return to Site</a>
+      <a href="{% url 'adminpanel' %}">Return to admin panel</a>
+    </p>
+    <button onclick="window.history.back();" class="btn btn-secondary">Back</button>
+  </footer>
+{% endblock %}

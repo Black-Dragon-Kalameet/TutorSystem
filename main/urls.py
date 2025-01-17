@@ -39,6 +39,9 @@ urlpatterns =[
     path('addtutor', views.addtutor, name ='addtutor'),
     path('deltutor/<int:id>/', views.deltutor, name ='deltutor'),
     path('allprofiles/', views.allprofiles, name='allprofiles'),
+    path('addbooks', views.addbooks, name='addbooks'),
+    path('editbooks/<int:id>/', views.editbooks, name='editbooks'),
+    path('deletebook/<int:id>/', views.deletebook, name='deletebook'),
 
 
 

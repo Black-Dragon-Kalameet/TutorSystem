@@ -410,3 +410,40 @@ def sendann(request):
                 
     form = forms.messageform()  
     return render(request, 'sendann.html', {'form': form})
+
+
+
+def addbooks(request):
+    if request.method == 'POST':
+        form = forms.addbook(request.POST, request.FILES)
+        if form.is_valid():
+            book = form.save(commit=False)
+            book.save()
+            return redirect('addbooks')  
+    else:
+        form = forms.addbook()
+
+    books = models.library.objects.all()
+    return render(request, 'addbooks.html', {'form': form, 'books': books})
+
+
+def editbooks(request, id):
+    book = models.library.objects.get(id=id)
+    if request.method == 'POST':
+        form = forms.addbook(request.POST, request.FILES, instance=book)
+        if form.is_valid():
+            form.save()
+            return redirect('addbooks')  
+    else:
+        form = forms.addbook(instance=book)
+
+    books = models.library.objects.all()
+    return render(request, 'addbooks.html', {'form': form, 'books': books})
+
+
+
+
+def deletebook(request, id):
+    book = models.library.objects.get(id=id)
+    book.delete()
+    return redirect('addbooks')
