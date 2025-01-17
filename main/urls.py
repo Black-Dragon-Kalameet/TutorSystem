@@ -38,6 +38,7 @@ urlpatterns =[
     path('delstudent/<int:id>/', views.delstudent, name ='delstudent'),
     path('addtutor', views.addtutor, name ='addtutor'),
     path('deltutor/<int:id>/', views.deltutor, name ='deltutor'),
+    path('allprofiles/', views.allprofiles, name='allprofiles'),
 
 
 

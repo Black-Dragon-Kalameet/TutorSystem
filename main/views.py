@@ -113,6 +113,10 @@ def vtutorprof(request, id):
     tutor = models.tutor.objects.get(id=id)
     return render(request,'tutor/vtutorprof.html',{'tutor':tutor})
 
+def allprofiles(request):
+    tutors = models.tutor.objects.all()
+    students = models.student.objects.all()
+    return render(request, 'allprofiles.html', {'tutors': tutors, 'students': students})
 
 
 def logouta(request):
